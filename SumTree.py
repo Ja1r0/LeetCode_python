@@ -90,3 +90,33 @@ class Solution:
             if node.right:
                 bfs.append(node.right)
         return False
+#########
+# 3 Sum #
+#########
+class Solution:
+    def threeSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        solution=[]
+        nums.sort()
+        for i in range(len(nums)-2):       
+            if i>0 and nums[i]==nums[i-1]:
+                continue
+            target=0-nums[i]
+            numbers=nums[i+1:]
+            s=set()
+            for value in numbers:
+                if target-value in s:
+                    solution.append([nums[i],value,target-value])
+                else:
+                    s.add(value)
+        final_solution=[]
+        for s in solution:
+            if set(s) not in final_solution:
+                final_solution.append(set(s))
+        sol=[]
+        for e in final_solution:
+            sol.append(list(e).sort())
+        return sol
