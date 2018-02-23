@@ -56,4 +56,38 @@ class Solution:
             res.next=ListNode(rem)
             res=res.next
         return resoult.next
+###############
+# Add Strings #
+###############
+'''
+Given two non-negative integers num1 and num2 represented as string, return the sum of num1 and num2.
+Note:
+The length of both num1 and num2 is < 5100.
+Both num1 and num2 contains only digits 0-9.
+Both num1 and num2 does not contain any leading zero.
+You must not use any built-in BigInteger library or convert the inputs to integer directly.
+'''
+class Solution:
+    def addStrings(self, num1, num2):
+        """
+        :type num1: str
+        :type num2: str
+        :rtype: str
+        """
+        carry=0
+        res=[]
+        num1=list(num1)
+        num2=list(num2)
+        while len(num1)>0 or len(num2)>0:
+            if len(num1)>0:
+                carry+=ord(num1.pop())-ord('0')
+            if len(num2)>0:
+                carry+=ord(num2.pop())-ord('0')
+            div,rem=divmod(carry,10)
+            carry=div
+            res.append(rem)
+        if carry:
+            res.append(carry)
+        return ''.join([str(i) for i in res])[::-1]
+            
         
