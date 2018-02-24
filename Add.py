@@ -89,5 +89,44 @@ class Solution:
         if carry:
             res.append(carry)
         return ''.join([str(i) for i in res])[::-1]
+####################
+# Multiply Strings #
+####################
+'''
+Given two non-negative integers num1 and num2 represented as strings, return the product of num1 and num2.
+Note:
+The length of both num1 and num2 is < 110.
+Both num1 and num2 contains only digits 0-9.
+Both num1 and num2 does not contain any leading zero.
+You must not use any built-in BigInteger library or convert the inputs to integer directly.
+'''
+class Solution:
+    def multiply(self, num1, num2):
+        """
+        :type num1: str
+        :type num2: str
+        :rtype: str
+        """
+        l1=len(num1)
+        l2=len(num2)
+        if l1<=l2:
+            rnum1=num1[::-1]
+            rnum2=num2[::-1]
+        else:
+            rnum2=num1[::-1]
+            rnum1=num2[::-1]
+        a=0
+        for idx1 in range(len(rnum1)):
+            n1=ord(rnum1[idx1])-ord('0')
+            carry=0
+            for idx2 in range(len(rnum2)):
+                n2=ord(rnum2[idx2])-ord('0')
+                carry,rem=divmod(n2*n1+carry,10)
+                a+=rem*(10**(idx1+idx2))
+            if carry:
+                a+=carry*(10**(idx1+idx2+1))
+        return str(a)
+
             
+        
         
